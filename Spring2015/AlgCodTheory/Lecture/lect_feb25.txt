@@ -1,0 +1,61 @@
+
+Construct  a syndrome look up table for the 
+PERFECT binary (7,4,3) code with generator  matrix
+and single error correcting.
+
+E: (Z^4)_k -> (Z^4)_k 	
+
+G = [	1 0 0 0 1 1 1
+	0 1 0 0 1 1 0
+	0 0 1 0 1 0 1
+	0 0 0 1 0 1 1 ]
+
+If code is perfect, we fill up vector space with "spehere"
+each sphere contains 
+
+Use your table to decode following received vector is 
+i.)  0 0 0 0 0 1 1
+ii.) 1 1 1 1 1 1 1
+ii.) 
+
+
+
+A generator matrixx G in systematic form 
+
+[ I_n | P ] , where P is the permutation matrix
+		I_n is identity matrix
+
+
+Parity check matrix H 
+
+H = [ -P | ...]
+i.e., [ 1  1 1  0 | 1 0 0
+	1 1 0 1 | 0 1 0
+	1 0 1 1 | 0 0 1 ]
+
+
+This is a group code. We will have our 
+legitimate code words corresponding
+to a subgroup A when H = 16
+
+This below the syndrome table is all received
+by receiving end. syndromme and coset leader 
+Syndrome lookup table
+
+syndrome | coset leader 
+-----------------------
+000		0000000
+111		1000000
+110		0100000
+101		0010000
+011		0001000
+100		0000100
+010		0000010
+001		0000001
+
+Decode
+** look at notes **
+
+---------------------------------------------
+
+

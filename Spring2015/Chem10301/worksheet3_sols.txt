@@ -1,0 +1,96 @@
+Pajuelo
+Chem 103
+
+1.) 
+A chemical reaction is a process that involves the
+rearrangement of the molecular or ionic structure of
+a substance, as opposed to a change in physical form
+or a nuclear reaction.
+
+What is involved in a chemical reaction?
+The substance or substances initially involved in a 
+chemical reaction are called reactants or reagents.
+
+What is evidence of a chemical reaction?
+The evidence is that they chemical reaction yield one
+or more product, which usually have properties different
+from the reactants. Reactions often consist of a sequence
+of individual sub-steps, the so-called elementary 
+reactions.
+
+2.)
+Balance the eq.& include the states of the matter:
+*** NEED STATE OF MATTER ***
+
+NO + O_2 -> NO_2
+2(NO) + O_2 = 2(NO_2)
+
+3.) 
+Molarity is the concentration of a solution expressed
+as the number of moles of solute per liter of solution.
+What is the formula for molarity (M)?
+
+Molarity(M) = (moles solute)/ (liters solution) = 
+		(number of moles of solute)/(volume of solution)
+
+4.) What is the equation used for solution dilution?
+Molarity_ini * Volume_ini = Moolarity_final * Volume_final
+
+5.) 
+What's the difference between theoretical yield, percent yield, 
+and actual yield?
+* Theoretical yield for a reaction is calculated based on the 
+limiting reagent.
+
+* Actual yield is the amount of product actually obtained from
+a chemical reaction.
+
+* Percent Yield = (actual yield/ theoretical yield ) * 100%
+
+6.) 
+Balance the eqs.
+a.) SO_3 -> SO_2 + O_2
+ ...
+
+7.) In an experiment 0.689 g Cr(s) reacts completely with 
+0.636 g 0_2 (g) to form a single solid compound. Write a balanced 
+chemical equation for the reaction.
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

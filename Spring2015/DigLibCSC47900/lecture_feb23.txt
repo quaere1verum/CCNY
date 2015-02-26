@@ -1,0 +1,78 @@
+* Lossles/lossy compression
+
+Run length encoding .- stat redundancy: condition for any to be working
+DPCM: predictive coding (Bayesian coding method)
+best/optimal encoding strategy.
+difference consumes much smaller space/bandwith
+
+arithmetic compression: king of all 
+
+entropic encoding >> huffman/shannon
+
+1 1 1 1 0 0 0 0 0 0 .... 0 1 1 1 1 1
+
+fax transmittal: 
+boolean:
+exploit redundancy: 255 bits in 8 bits: 255/8 > 30 dramatic
+
+count number of run
+
+Lossless vs. lossy compression: 
+lossless every bit remains after uncompressed.
+lossy reduces file byy eliminating redundant  info
+
+//=====================
+On test
+1.Bayesian question:
+formula
+
+2.)  coding based on proof median/mean reasoning
+
+
+3.) coding <15 lines 
+//====================
+RLE 
+
+for int i =1 <n i ++
+	if cur val == A[i] && count <256
+ 		count++
+	else
+		curval = A[i]
+		cout <<"curr val count<<
+		count = 1
+
+cout << count << endl
+
+
+// for image recognition
+matlab: image processing toolbox
+python: scikit-image 
+
+
+histogram 
+count number of occurrences of every
+gray scale value in a image
+
+
+increasing contrast in image
+find in matlab min and max
+say I is image matrix
+min(I(:))
+
+I = double(I)
+I = ((I-74)/(224-74))*255
+74 is min 
+224 is max 
+I = ((I - min)/(max-min))*255
+
+as rubber band histogram
+
+
+
+
+
+
+
+
+
+
