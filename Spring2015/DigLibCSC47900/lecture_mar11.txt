@@ -1,0 +1,80 @@
+** Arithmetic encoding === Embedding encoding **
+
+binary string by huffman: 0.0001 0.2 get same coding lenght and not fair
+HUffman is non adaptive
+1. non-adaptive
+2. very infrequent symbols
+   long tail effect: small potatoes still have chance
+   book sellers have chance because of the internet
+---------------------------------------
+new king of entropy:
+all symbols sum to prob 1 
+
+associate small domains in [0,1)
+to each symbol
+
+symbol 1 : [0, prob1)
+symbol2 : [prob1, prob2)
+
+dictioary  of n symbols is just domains
+
+msg:
+compress domain embedding/shrinking
+shrink domain from length 1 to very small one
+
+e.g.
+AAB
+P_A = 1/4
+P_A = 1/4
+P_B = 1/2
+first A  = 1/4 ,A =  [0,1/4)
+second A = 1/4 , AA = [0,1/16)
+B = 1/2 , AAB = [1/32, 1/16)
+number of symbols = 3
+transmit one number inside this domain reconstruct.
+
+transmit is 1 integer, 1 dooble: in theory it;s good 
+
+
+Can handle long-tail problem
+
+entropy = bound of any lossless compression
+
+e.g.:
+AAC: [1/32, 1/16):
+number of sumbols:3
+transmit one number inside this domain
+reconstruct: domain expanding(reverse)
+
+what is the dictionary?
+* assign in day 1 equal length dict.
+* train communications to find frequency and change 
+dictionary length
+* repeat every 3 days to find new frequencies
+
+To avoid underflow use (log and strings).
+log of a huge number 
+
+---------------------------------------
+huffman = dictionary + msg
+00001110001 = msg
+A:0
+B:10
+C:11
+-----------------------------------
+1sst order system, the cross
+	 x
+	x*x
+	 x 
+2nd order system, we have 8 neighbots
+
+
+
+* image recognition *
+we use  2nd order for foreground 
+	1st order for background 
+
+
+
+
+

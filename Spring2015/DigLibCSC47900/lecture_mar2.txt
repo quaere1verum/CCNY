@@ -1,0 +1,16 @@
+* Goes over Otsu method again
+and Otsu's threshold ...
+
+* quantize and be careful that quantization makes sense.
+
+shannon == 
+* entropy = -sum p*log p, p is probability, Information = logp
+
+* shannon, no code should be prefix to another code
+
+* Prove that huffman encoding satisfy:
+x and y are symbols
+known p(x) > p(y)
+prove 
+length(huffman(x)) <= length(huffman(y))
+

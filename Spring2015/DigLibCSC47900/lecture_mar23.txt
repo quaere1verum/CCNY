@@ -1,0 +1,63 @@
+
+* 	Entropy 
+	f(x) = xlogx +(1-x)log(1-x)
+	x in between [0,1]
+
+x =1, entropy = 0
+x=0, entropy =0
+x =1/2, fx is maximized
+
+f'x = logx + 1 - log(1-x) - 1
+= logx/(1-x) = 0
+x/1 - x = 1 	x=1/2 
+
+maximal entropy occurs when fair coin fair coin:
+least information before toss gambling: p(head)=0.501 Law of large numbers (LLN)
+
+(maybe on midterm)
+symbols: which distribution max entropy: 
+p(x) = 1/n
+increasing: entropy easy, decrease entropy difficult. glass vs. broken glass 
+
+
+JPEG2000: 1990: DCT/Fourier local jump/noise: felt globally fourier(dirac delta ) =1
+local spatial --> global in DCT/ f domain spectrum
+
+new transform to replace DCT/DFT 
+data <--> t. domain
+a b : spattial /stat red
+similar value of a & b  a-b: small 
+a-b diff is small 
+
+(a+b)/2 avg  
+
+a b c : 0.3a
+wavelets : mother wavelet diff e.g. a-b 
+		difference filter  
+		father wavelet avg, e.g., (a+b)/2
+		averaging  filter 
+
+Daub 
+Haar (30's ) wavelet(90)
+
+rememeber wavelets are hierarchichal 
+hierarchical: haar transforms
+a b c d:	strong sp red 
+
+1st iteration 
+(a+b)/2 	(c+d)/2		a-b		c-d
+
+2nd iteration 
+(a+b+c+d)/4	(a+b)/2	 - (c+d)/2	a-b	c-d
+100		0		0	0
+
+3 or 4 iteration
+
+DWT better compression ratio than DCT local spike: local impact
+satelite image astrology
+
+jpeg 2000: dct - > dwt no macroblocking
+3-4 iterations
+
+
+

@@ -1,0 +1,44 @@
+* Kraft inequality, for any non-prefix code
+Sum 1/2^(l_i) <=1, constraints for l_i
+
+
+
+* Fundamental theorem of entropy encoding. 
+
+------------------------------------------------------------
+* Entropy meaning:
+
+entropy (symbols) = 	sum pi (log 1/p_i) 
+			log p_i is a proxy of l_i
+
+entropy . - minimal mean length of all prefix symbols lower bound of mean length of TS,
+ts = typical sequence. 
+
+* typical sequence (ts) :  10 tails/heads are impossible
+example : 
+p (H H  H H H H  H H H T)
+p(T H H H H H H H H H H)
+, we just count number of T's and number of H's 
+
+
+infer:
+	-log p_i :
+p_i is 0.00001:5
+a: 0.999999
+b: 0.000001
+
+Huffman is not optimal 
+vectorized: be better, achieve  global minimum
+---------------------------------------------------
+Arithmetic encoding: symbol : domain whose size  = p_i
+approximately optimal
+
+
+
+
+=========================
+Recap:
+* Typical sequence
+* kraft inequality 
+* lagrange: l_i inproppto - log p_i
+* entroppy : mean length of typical sequences
