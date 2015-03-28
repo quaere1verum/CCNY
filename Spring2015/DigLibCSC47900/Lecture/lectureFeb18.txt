@@ -1,0 +1,25 @@
+* redundancy root cause of compression
+
+* image: spatial redundancy
+2 given pixels 
+
+* Insert redundancy to tolerate errors
+
+* Shannon:
+Information theory
+communication theory
+
+Compression, lowest bound is the entropy
+
+* Difference Pause Coding Method (DPCM)
+Idea, we have a sequence  
+100 100 100 101 99 97 101 200 201 203 204
+1byte for each val we need 10 bytes 
+
+reduce number of bits to represent
+100	100 	100	101 	99 	97	101  	200 201	203
+100	0	0	1	-2	-2	4 	99  1 	2 
+
+0 order DPCM, use previous value as a constant for next value
+
+get two previous values, we can get linear regression. 

@@ -1,0 +1,58 @@
+LEMMA 1 TO validate huffman alg.
+
+sort, merge two leading symbols they two are the 2 symbols with the
+smallest prob/freq.
+
+Huffmann -> they have the same length prove  huffman did this way
+and worked 2 symbols: have smallest freq:
+they should have the same length if our encoding the optimal
+
+proof:
+ by contradiction
+assumption best possible coding methood,
+a b two symbols with smallest frequency
+l(a)!=l(b) // l(x) is error of x 
+
+axiom 1: shannon
+ a b, if p(a)>=p(b)
+, then l(a)< l(b)
+
+
+
+
+--------------------
+Lemma 2: assignment
+hint: find cases to cover and exhaust all cases
+
+
+
+========================================
+Notes on assignment
+hint for prob 2... follow huffman algorithm
+, use induction
+
+induction by number of symbols, base casse 2 symbols
+assume true for k=2 symbols, show for k+1
+
+one case: 2 symbols are 2 leading symbols: same length 
+after merging these 2, we have overall k,
+
+second case: they are not the two leading ones, how to
+huffman encodeing:
+a: 0.35, b:0.3201, c: 0.3199, d: 0.01
+c:000; d:001
+
+one major trouble of H.E
+example c and d above get paired almost  equally, even though
+c is close to a and b
+fatality 1: least ffrequent symbols
+	 2: no adaptivitiy
+
+-----------------------------------------
+notes on otsu, python code called otsu.
+matlab otsu has another name
+
+Do not call otsu, implement otsu on your own.
+If you don't know, call otsu.
+  
+

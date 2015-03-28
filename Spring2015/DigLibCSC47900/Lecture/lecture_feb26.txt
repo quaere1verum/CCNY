@@ -1,0 +1,71 @@
+* Overviews last class
+#   I = ( (I - min)/(max - min) ) * 255
+
+* History stretching method: rubber band
+Contrast enhancement
+
+
+* Pepper noise  
+I[1][1] = 0 // black pepper
+I [2][1] = 255 // white pepper
+
+* change format of numbers on division I / ...
+turn it into a doubles
+
+* Equalization idea to solve 
+  outlier problems in image 
+
+* Signal vs. noise
+alg: general/too specific to solve one 
+case useless
+
+* Histogram equalization( Best way to improve image contrast)
+ideal histogram 
+y
+|
+|
+| -----------------------
+_________________________ x
+
+
+w*h/256 = dream height for amplidtuudes on bimodal histograms
+, w = width
+, h is height 
+
+
+* Use idea of image equalization as 
+if histogram 
+| |  	       ||
+| |            ||
+-----------------
+
+then
+|   
+|   |      |    | 
+|   |      |    |
+-----------------
+
+
+
+* otsu method AKA gray thresh in matlab
+  find value based on weights
+  w1*var1 + w2*var2
+
+  otsu method useles if there are varying illumination
+  lighting source.
+
+  adaptive thresholding == call otsu on each square
+	-------
+image = | | | |
+	-------
+	| | | |
+	-------
+
+* compare binary images automatically
+  compute: area sum 1's 
+      	   boundary length: 1 pixel with adjacent 0s 
+Area and L 
+	A = pi* r^2
+	L = 2*pi * r
+	compactness : geometric index of shape
+
