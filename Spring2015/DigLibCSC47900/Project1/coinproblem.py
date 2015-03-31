@@ -1,125 +1,184 @@
 import cv2
 from scipy import misc
-
 # import matplotlib.pyplot as plt
-
 import numpy as np 
 from PIL import Image
 
-############################################
-# Javier Pajuelo
-# Professor Jie Wei
-# 
-# Project 1 - Digital Libraries Spring 2015
-# Problem #4 : Coin Recognition
-############################################
+#################################################################
+# Javier Pajuelo                                                #
+# Professor Jie Wei                                             #
+#                                                               #
+# Project 1 - Digital Libraries Spring 2015                     #
+# Problem #4 : Coin Recognition                                 #
+# Code uses opencv2 built-in HoughCircles algorithm             #
+# that finds circles in image, but algorithm is far from        #
+# being robust, so I aided the recognition with modifyications  #
+# in the images such as medianBlur, etc.                        #
+#                                                               #
+# * Outcome: When coins are distant apart and colors are defined# 
+# from background, the recognition is almost flawless.          #
+#################################################################
 def main():
     # read coin 
-    # image = cv2.imread('uk-coins.jpg')
-    # image = cv2.imread('coins-2.jpg')
+    image = cv2.imread('uk-coins.jpg')
+    #image = cv2.imread('coins-2.jpg')
     # image = cv2.imread('coins.jpg')
-    image = cv2.imread('coinstacked.jpg')
+    # image = cv2.imread('coinstacked.jpg')
     
-    
+    # show gray image 
     # cv2.imshow('gray ', gray)
     # cv2.show()
-    
-    output = image.copy() 
-    
-    # aid recognition 
+    outimg = image.copy() 
+    # The functions below can aid recognition 
     '''
-    image = cv2.medianBlur(image,5 )
-    
+    image = cv2.medianBlur(image,5 ) 
     # adding more aid to recognition
     # smoothing edges and make gray image more recognizable
     image = cv2.GaussianBlur(image,(5,5),0) 
-
     # smooth image prevent false circles
     image = cv2.bilateralFilter(image,9,75,75)
-    '''
+    ''' 
 
-
-    """
-    plt.subplot(121),plt.imshow(image,cmap = 'gray')
-    plt.title('Original Image'), plt.xticks([]), plt.yticks([])
-    plt.subplot(122),plt.imshow(edges,cmap = 'gray')
-    plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
-    plt.show()
-    """
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    
+    # defuault approach 
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)   
     gray = cv2.medianBlur(gray,5 )
     # gray = cv2.GaussianBlur(gray,(5,5),0) 
     gray = cv2.bilateralFilter(gray,9,75,75)
-
-
-
-    print "About to show image gray scale ... "
-    cv2.imshow('Gray', gray)
     
-    # print "print image = ", gray.size
-    # size = gray.size/
-    """"
-    vals  = gray_img.flatten()
-
-    from matplotlib import pyplot as plt
-    counts, bins = plt.hist(vals,range(257))
-
-    # plot histogram centered on values 0..255
-    plt.bar(bins[:-1] - 0.5, counts, width=1, edgecolor='none')
-    plt.xlim([-0.5, 255.5])
-    plt.show()
-    """
-    #===============================================================
-    # detect circles in the image
-    # 1.6 , 150 
-    '''
-    img = cv2.imread('uk-coins.jpg',0)
-    img = cv2.medianBlur(img,5)
-    cimg = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
-    gray = img 
-
-    circles = cv2.HoughCircles(gray, cv2.cv.CV_HOUGH_GRADIENT, 1, 20, 
-            param1=50, param2=30, minRadius=0, maxRadius=0)
-
-    circles = np.uint16(np.around(circles))
-    for i in circles[0,:]:
-            # draw the outer circle
-        cv2.circle(cimg,(i[0],i[1]),i[2],(0,255,0),2)
-                    # draw the center of the circle
-        cv2.circle(cimg,(i[0],i[1]),2,(0,0,255),3)
-
-    cv2.imshow('detected circles',cimg)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    '''
-    #===============================================================
-
+    # opencv stuff  
     circles = cv2.HoughCircles(gray, cv2.cv.CV_HOUGH_GRADIENT, 1.2, 100)
-            #\
-            #param1=50,param2=30,minRadius=0,maxRadius=gray.size/2)
-
-    # print "circles = ", circles 
-
-    # ensure at least some circles were found
+    
+    # opencv might return nothing, if circles cannot be read in image 
     if circles is not None:
-        # convert the (x, y) coordinates and radius of the circles to integers
+        # circles contains positions of center and such, convert into integer
         circles = np.round(circles[0, :]).astype("int")
 
-        # loop over the (x, y) coordinates and radius of the circles
-        for (x, y, r) in circles:
-            # draw the circle in the output image, then draw a rectangle
-            # corresponding to the center of the circle
-            
-            cv2.circle(output, (x, y), r, (111, 255, 0), 4)
-            # cv2.circle(output, (x, y), r, (0, 255, 0), 4)
-            cv2.rectangle(output, (x - 5, y - 5), (x + 5, y + 5),\
+        # iterate over coordinates and radius 
+        for (x_axis, y_axis, r) in circles:
+            # draw on image for output  
+            cv2.circle(outimg, (x_axis, y_axis), r, (255, 55, 90), 4)
+            cv2.rectangle(outimg, (x_axis - 5, y_axis - 5), (x_axis + 5, y_axis + 5),\
                     (0, 128, 255), -1)
-
-        # show the output image
-
-        cv2.imshow("image\toutput", np.hstack([output]))
-        #cv2.imshow("image\toutput", np.hstack([image, output]))
+        
+        # show image 
+        cv2.imshow("Image using medianBlur, bilateralFiler, and "\
+                "HoughCircles: ", np.hstack([outimg]))
         cv2.waitKey(0)
+    
+    else:
+        """
+        Upon failure to recognize default recognition.
+        Code showcases all image files with different approaches to 
+        recognize circles 
+        """
+        trial = 4
+        print "No circles found using default approach.\n"\
+                "Starting trials to modify image and aid algorithm:"
+        filelst = ['coins-2.jpg', 'uk-coins.jpg', 'coins.jpg',\
+                'coinstacked.jpg']    
+        fidx = 0
+        
+        image = cv2.imread(filelst[fidx])
+        print "Working on image: "+filelst[fidx]
+        while trial>0:
+            
+            
+            outimg = image.copy() 
+            circle_count = 0
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            if trial==1:
 
+                gray = cv2.medianBlur(gray,5 )
+                circles = cv2.HoughCircles(gray, cv2.cv.CV_HOUGH_GRADIENT,\
+                        1.2, 100)
+
+                
+                if circles is not None:
+                    circles = np.round(circles[0, :]).astype("int")
+
+                    for (x_axis, y_axis, r) in circles:
+                        circle_count += 1
+                        cv2.circle(outimg, (x_axis, y_axis), r, (111, 255, 0), 4)
+                        cv2.rectangle(outimg, (x_axis - 5, y_axis - 5), (x_axis + 5, y_axis + 5),\
+                                (0, 128, 255), -1)
+
+                    cv2.imshow("Image aided by medianBlur", outimg)
+                    cv2.waitKey(0)
+
+                print "Trial "+str(trial)+" using medianBlur found "+\
+                        str(circle_count)+ " circles"
+            
+            if trial==2:
+                gray = cv2.GaussianBlur(gray,(5,5),0) 
+                circles = cv2.HoughCircles(gray, cv2.cv.CV_HOUGH_GRADIENT,\
+                        1.2, 100)
+                
+                if circles is not None:
+                    circles = np.round(circles[0, :]).astype("int")
+
+                    for (x_axis, y_axis, r) in circles:
+                        circle_count+=1
+                        cv2.circle(outimg, (x_axis, y_axis), r, (20, 50, 255), 4)
+                        cv2.rectangle(outimg, (x_axis - 5, y_axis - 5), (x_axis + 5, y_axis + 5),\
+                                (0, 128, 255), -1)
+
+                    cv2.imshow("Image aided by GaussianBlur",\
+                            np.hstack([outimg]))
+                    cv2.waitKey(0)
+                
+                print "Trial "+str(trial)+" using GaussianBlur found "+\
+                        str(circle_count)+" circles"
+
+            if trial ==3:       
+                gray = cv2.bilateralFilter(gray,9,75,75)
+                circles = cv2.HoughCircles(gray, cv2.cv.CV_HOUGH_GRADIENT,\
+                        1.2, 100)
+
+                if circles is not None:
+                    circles = np.round(circles[0, :]).astype("int")
+
+                    for (x_axis, y_axis, r) in circles:
+                        circle_count+=1
+                        cv2.circle(outimg, (x_axis, y_axis), r, (50, 255, 50), 4)
+                        cv2.rectangle(outimg, (x_axis - 5, y_axis - 5), (x_axis + 5, y_axis + 5),\
+                                (0, 128, 255), -1)
+
+                    cv2.imshow("Image aided by bilateralFilter",\
+                            np.hstack([outimg]))
+                    cv2.waitKey(0)
+
+                print "Trial "+str(trial)+" using bilateralFilter found "\
+                        +str(circle_count)+" circles"
+
+
+            if trial ==4:       
+                gray = cv2.medianBlur(gray,5 ) 
+                gray = cv2.GaussianBlur(gray,(5,5),0) 
+                gray = cv2.bilateralFilter(gray,9,75,75)
+                circles = cv2.HoughCircles(gray, cv2.cv.CV_HOUGH_GRADIENT,\
+                        1.2, 100)
+
+                if circles is not None:
+                    circles = np.round(circles[0, :]).astype("int")
+
+                    for (x_axis, y_axis, r) in circles:
+                        circle_count+=1
+                        cv2.circle(outimg, (x_axis, y_axis), r, (255, 50, 50), 4)
+                        cv2.rectangle(outimg, (x_axis - 5, y_axis - 5), (x_axis + 5, y_axis + 5),\
+                                (0, 128, 255), -1)
+
+                    cv2.imshow("Image aided by all previous algorithms",\
+                            np.hstack([outimg]))
+                    cv2.waitKey(0)
+            
+                print "Trial "+str(trial)+" using all algorithms above found "\
+                        +str(circle_count)+" circles"
+            trial-=1
+            
+            if trial == 0 and fidx < len(filelst)-1:
+                fidx+=1
+                trial = 4 
+                image = cv2.imread(filelst[fidx])
+                print "\n\n\nWorking on image: "+filelst[fidx]
+        
 main()

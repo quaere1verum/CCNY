@@ -1,38 +1,41 @@
 import cv2
 from scipy import misc
-#import matplotlib.pyplot as plt
-
 import numpy as np 
 from PIL import Image
-#from matplotlib import pyplot as plt
+
+#####################################################################
+# Javier Pajuelo                                                    #
+# Professor Jie Wei                                                 #
+#                                                                   # 
+# Project 1 - Digital Libraries Spring 2015                         #
+# Problem #2 : Adaptive Otsu comparison                             #
+# Notes:                                                            #   
+# Dependencies are numpy, cv2, scipy, and                           #
+# PIL                                                               #
+#                                                                   #
+# * Adaptive Otsu was made splitting the image matrix in four parts #
+#                                                                   #
+# * Adaptive Otsu with overlapping matrices was made splitting the  #
+# image matrix into 6, the four matrices used before and one for    #
+# each row overlapping the other two. e.g,                          #
+# [    | ] [ |   ]                                                  #
+# [    | ] [ |   ]                                                  #
+# [    | ] [ |   ]                                                  #
+# the thresholds of overlapping matrices are averaged and assigned  #
+# for middle matrix.                                                #
+#                                                                   #
+# * Outcome: Charts show an improvement in adaptive otsu with       #
+# overlapping over the standard adaptive Otsu.                      #
+# The global Otsu approach is visibly inferior than the adaptive.   #
+#####################################################################
 
 
-#import plotly.plotly as py
-#from plotly.graph_objs import * 
-
-############################################
-# Javier Pajuelo
-# Professor Jie Wei
-# 
-# Project 1 - Digital Libraries Spring 2015
-# Problem #2 : Adaptive Otsu comparison 
-##########################################
 def adaptive_otsu(grayimg_mat):
     print grayimg_mat
     # sliced_otsu = grayimg_mat.copy()
     print "shape mat = ", grayimg_mat.shape 
     r , c = grayimg_mat.shape
     
-    """
-    0 ...   c/2          .... c
-    .
-    .
-    r/2     c/2     c/2+1 ... c
-    r/2 +1          
-    .
-    .
-    r                     ... c
-    """
     # Slice matrix image
 
     # get upper left quadrant 

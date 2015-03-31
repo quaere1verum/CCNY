@@ -3,38 +3,39 @@
 #include<cstdlib>
 #include<stdlib.h>
 using namespace std;
-/****************************************
-* Javier Pajuelo			*
-* Prof. Jie Wei				*
-* Digital Libraries - Spring 2015	*
-*					*
-*****************************************/
+/********************************************
+* Javier Pajuelo			                *
+* Prof. Jie Wei				                *
+* Digital Libraries - Spring 2015	        *
+* Assignment1 : Zig -zag			        *
+*********************************************/
 
-/*
- main function accepts values or rows and columns and creates
- a random matrix of real numbers with those dimensions.
- Then, the code creates an array that grabs values in matrix in 
- a zig zag manners and prints the values in the array to the screen
 
- @params 	assumes first argument is row in integers
-		assumes second argument is columns in integers
- @return	int 0 for correct 
-		int 1 for error
-*/
+/********************************************************************
+ main function accepts values or rows and columns and creates       *
+ a random matrix of real numbers with those dimensions.             *
+ Then, the code creates an array that grabs values in matrix in     *
+ a zig zag manners and prints the values in the array to the screen *
+                                                                    *
+ @params 	    assumes first argument is row in integers           *
+		        assumes second argument is columns in integers      *
+                                                                    *
+ @return	    int 0 for correct                                   *
+		        int 1 for error                                     *
+*********************************************************************/
 int main(int argc, char* argv[])
 {
-	
+    int DEBUG = 0;
 	srand(time(0)); // current time as seed 	
 	int  N = -1;	// row int
 	int  M = -1;	// col int
 
-	cout <<"argc = "<< argc<<"\n";	
 	try{
 		if (argc < 2)
 		{
-			cout<<"Nothing was entered!!\nUsing default matrix size 2.\n";
-			N = 2;
-		}	
+			cout<<"Nothing was entered!!\nPlease enter code as: $./test <row number> <col number>\n";
+	        return 1;
+        }	
 		else{
 			N = atoi(argv[1]);
 			M = atoi(argv[2]);
@@ -44,7 +45,8 @@ int main(int argc, char* argv[])
 		cout << "Please, enter an integer parameter.\nError: "<<argv[1]<<
 			" entered.\nException: "<<e.what();
 	}
-
+    
+    cout<<"\n\nRandom Matrix:\n";
 	int mat[N][M];
 	for(int i =0;i<N;i++)
 	{
@@ -107,18 +109,9 @@ int main(int argc, char* argv[])
 	int elem = 0;
 	int elems = mat_size;	
  	
-	// print mat
 	int idx=0, jdx=0;
-	for(idx=0;idx<N;idx++)
-	{
-		for(jdx=0;jdx<N;jdx++)
-		{
-			cout<<", "<<mat[idx][jdx];
-		}
-		cout<<"\n";
-
-	}	
-	elem =0;
+	
+    elem =0;
 	// get first elem
 	tmp[elem] = mat[0][0];
 	elem++;
@@ -126,29 +119,33 @@ int main(int argc, char* argv[])
 	int it = 0;
 	while(elem < elems)
 	{
-		cout <<"Iteration : "<< it<<"\ni = "<<i<<"\tj = "<<j<<"\n\n\n\n";
-		it++;		
+
 	
 		//==================================	
 		// print info 
-        cout<<"\n\n\nI.) elem = "<<elem<<"\n\ntmp = [";
-		idx=0;
-		while (idx<mat_size)
-		{
-			cout<<tmp[idx]<<", ";
-			idx++;
-		}
-		cout<<"]\n";
-		idx=0;
-		
-		cout<<"("<<i<<","<<j<<")\n";
-	 	if(i>=rows)		
-		{
-			cout<<"i>=rows";
-			break;
-		}
-		if(j>=cols)
-			break;	
+        if (DEBUG==1){ 
+            cout <<"Iteration : "<< it<<"\ni = "<<i<<"\tj = "<<j<<"\n\n\n\n";
+            it++;		
+            
+            cout<<"\n\n\nI.) elem = "<<elem<<"\n\ntmp = [";
+            idx=0;
+            while (idx<mat_size)
+            {
+                cout<<tmp[idx]<<", ";
+                idx++;
+            }
+            cout<<"]\n";
+            idx=0;
+            
+            cout<<"("<<i<<","<<j<<")\n";
+            if(i>=rows)		
+            {
+                cout<<"i>=rows";
+                break;
+            }
+            if(j>=cols)
+                break;	
+        }
 		//==================================	
 
 
@@ -174,8 +171,7 @@ int main(int argc, char* argv[])
 				acc_j = j;
 				acc_i = i;
 		        
-				cout<<"tmp = "<< tmp[elem] <<"\ti "<<i<<"\tj="<<j<<
-						"\tacc_i="<<acc_i<<"\n\n";
+			
 
 				elem ++;
                  
@@ -185,7 +181,6 @@ int main(int argc, char* argv[])
 				while(acc_j>0 &&  acc_i<N-1)
                 // while(acc_j!=acc_i)
 				{
-                    cout<<"inside first while ... \n";
 					// increase i
 					i++;
 					// decrease j
@@ -195,8 +190,6 @@ int main(int argc, char* argv[])
 					
 					acc_j = j;
 					acc_i = i;	
-					cout<<"tmp = "<< tmp[elem] <<"\ti "<<i<<"\tj="<<j<<
-						"\tacc_i="<<acc_i<<"\n\n";
                     elem++;
 
 
@@ -204,66 +197,33 @@ int main(int argc, char* argv[])
 			}
 			else{
 				// you are in the matrix's upper right corner
-				cout<<"Matrix upper right corner with mat[i][j = "<< mat[i][j]<<"\n\n";	
 				//cout<<"j+1 = "<< j+1<<"\n";
 				// move down
 				i++;
 				acc_j = j;
 				acc_i = i;
-				
-				cout<<"i "<<i<<"\tj="<<j<<"\tacc_j="<<acc_j<<"\tacc_i="<<acc_i<<"\n\n";
-				
+					
 				tmp[elem] = mat[i][j];
 				elem++;
 				
 				while ( acc_i < N-1)
-				{
-						
+				{		
 					i++;
 					j--;
 					
 					tmp[elem] = mat[i][j];
-											
-
 					acc_i = i;
 					
-
-					cout<<"tmp = "<< tmp[elem] <<"\ti "<<i<<"\tj="<<j<<
-						"\tacc_i="<<acc_i<<"\n\n";
-
-
-
 					//acc_j = j;		
 					
 					// NOTE: you don't always decrease j! 		
 					if (acc_i == N)
 					{
-
-						cout<<"case when acc_i = N \treducing j from "<< j 
-							<<" to "<< j+1<<"\n";
-						j++;
+                        j++;
 					}
-
-					
+		
 					elem++;
 				}	
-									
-
-				//while(acc_j!=acc_i)
-				/*{
-					tmp[elem] = mat[i][j];
-					i++;
-					j--;
-
-					acc_i += i;
-					acc_j += j;		
-					
-					cout<<"tmp = "<< tmp[elem] <<"\ti "<<i<<"\tj="<<j<<
-						"\tacc_j="<<acc_j<<"\tacc_i="<<acc_i<<"\n\n";
-					
-					elem++;
-				
-				} */// at this point mtrix has gone down diagonal /
 				if (i==N) // if i ended up equal to rows
 				{
 					i = N-1;
@@ -271,7 +231,6 @@ int main(int argc, char* argv[])
 				 	// j ++; 	
 				}
 
-				cout<<"Right before leaving else: ("<<i <<", "<< j<<")\n";
 			}
 
 
@@ -279,22 +238,21 @@ int main(int argc, char* argv[])
 		}
 	
 		// =================================
-		cout<<"\n\n\nII. elem = "<<elem<<"\n\ntmp = [";
-		idx=0;
-		while (idx<mat_size)
-		{
-			cout<<tmp[idx]<<", ";
-			idx++;
-		}
-		cout<<"]\n";
-		idx=0;	
-		cout<<"("<<i<<","<<j<<")\n\n\n\n";
+		if(DEBUG==1){
+            cout<<"\n\n\nII. elem = "<<elem<<"\n\ntmp = [";
+            idx=0;
+            while (idx<mat_size)
+            {
+                cout<<tmp[idx]<<", ";
+                idx++;
+            }
+            cout<<"]\n";
+            idx=0;	
+            cout<<"("<<i<<","<<j<<")\n\n\n\n";
+        }
 		// =================================
-
-
 			
 		if(j==0) {
-			cout<<"i+1 = "<<i+1<<"\nmatrow-1 = "<<matrow-1<<"\n";
 
 			if(i+1 <= matrow-1)
 			{
@@ -309,17 +267,21 @@ int main(int argc, char* argv[])
 				acc_j=j;
 				// go on diagonal and compare
 				// TODO: modify while loop so it deals with non-square mats
-                while(acc_i!=acc_j)
+                //
+                // go up on diagonal 
+                while(acc_i > 0 && acc_j<M-1)
 				{
-
+                    
 					i--;
 					j++;
 
 					tmp[elem]=mat[i][j];
-					elem++;
-					acc_i+=i;
-					acc_j+=j;
+	    			
+                    elem++;
+					acc_i=i;
+					acc_j=j;
 				}
+
 			}
             else{ // you are in column 0 and cannot move down.
                   // left bottom corner case 
@@ -334,14 +296,11 @@ int main(int argc, char* argv[])
                 //   ^
                 //  /
                 
-                cout<<"tmpp = "<<tmp[elem] <<"\t("<<i<<", "<<j<<")\n"; 
                 while(acc_i >0 && acc_j < M-1)
                 {
-                    cout<<"inside new whiile lll... \n\n";
                     i--;
                     j++;
                     tmp[elem] = mat[i][j];
-                    cout<<"tmpp = "<<tmp[elem] <<"\t("<<i<<", "<<j<<")\n"; 
                     elem++;
                     acc_i = i;
                     acc_j = j;
@@ -352,34 +311,36 @@ int main(int argc, char* argv[])
 		}
 		
 		// ===========================================	
-		cout<<"\n\n\nIII elem = "<<elem<<"\n\ntmp = [";
-		idx=0;
-		while (idx<mat_size)
-		{
-			cout<<tmp[idx]<<", ";
-			idx++;
-		}
-		cout<<"]\n\n";
-		idx=0;
-		
-			
-		for(idx=0;idx< N;idx++)
-		{
-			for(jdx=0;jdx<M;jdx++)
-			{
-				cout<<", "<<mat[idx][jdx];
-			}
-			cout<<"\n";
+		if(DEBUG==1)
+        {
+            cout<<"\n\n\nIII elem = "<<elem<<"\n\ntmp = [";
+            idx=0;
+            while (idx<mat_size)
+            {
+                cout<<tmp[idx]<<", ";
+                idx++;
+            }
+            cout<<"]\n\n";
+            idx=0;
+            
+                
+            for(idx=0;idx< N;idx++)
+            {
+                for(jdx=0;jdx<M;jdx++)
+                {
+                    cout<<", "<<mat[idx][jdx];
+                }
+                cout<<"\n";
 
-		}		
-		
-		cout<<"("<<i<<","<<j<<")\n";
+            }		
+            
+            cout<<"("<<i<<","<<j<<")\n";
+        }
 		// ===========================================	
 	
 		// after this we are in the upper row 
 		// or i =0
 		// if there is a right neighbor
-		cout<<"code about to break\n";
 		if (j==0)
 		{
 			
@@ -419,27 +380,20 @@ int main(int argc, char* argv[])
 				acc_i = i;
 				acc_j = j;
 				// tmp[elem] = 
-				cout<<"i= "<<i<<"\tj = "<<j<<"\n";
 
 				tmp[elem] = mat[i][j];
 				elem++;
-				cout <<"acc_i before loo\t"<<acc_i<<"\tacc_j= "<<acc_j<<"\n";
-
-				cout<<"assigning = tmp["<<elem<<"] = "<<mat[i][j]<<"\n";	
 	            
                 //while(acc)
 				while(acc_i!=acc_j)
 				{
-					cout<<"assigning = tmp["<<elem<<"] = "<<mat[i][j]<<"\n";		
 					//tmp[elem] = mat[i][j];
 					i--;
 					j++;
-					cout<<"adding "<< i << " to "<<acc_i <<"\t j= "<<j<<" to acc_j\n";		
 					acc_i+=i;
 					acc_j+=j;
 
 					tmp[elem] = mat[i][j];
-					cout<<"acc_i = "<< acc_i<<"\tacc_j = "<<acc_j<<"\n";
 					elem++;
 				}
 			}
@@ -451,25 +405,21 @@ int main(int argc, char* argv[])
 		{
 			// if you are last row
 			if(i==N -1 ){
-				cout<<"inside my construction ... ";
 				//move right
 				j++;
 				//get element 
 				tmp[elem]  = mat[i][j];	
 				elem++;
-				cout <<"i = "<<i <<" j = "<<j<<"\ntmp[elem] = "<<tmp[elem-1]<<"\n";
 				
 				// move in the diagonal in this form 	 ^
 				// 					                    /
 				// keep going while either or reaches a bound
 				while(i >0 && j<M-1)	
 				{
-					cout<<"j = "<<j <<" < "<<"M = "<<M-1<<"\n";
 	
 					j++;
 					i--;
 					tmp[elem] = mat[i][j];
-					cout<<"tmp ="<< tmp[elem]<<"\t(i,j)=("<<i<<","<<j<<")\n";
 					elem++;			
 				}	
 			}			
@@ -479,23 +429,15 @@ int main(int argc, char* argv[])
                 //       /
                 //      v
                 
-                cout <<"j+1<cols \tj= "<< j <<"\ti="<< i<<"\n";
-				cout<<"mat["<<i<<"]["<<j<<"] =" <<mat[i][j]<<"\n";
 
 				j++;
 				
-				cout<<"mat["<<i<<"]["<<j<<"] =" <<mat[i][j]<<"\n";
 				tmp[elem] = mat[i][j];
-				
-				cout<<"Just assigned: \t"<<tmp[elem]<<"\n";
 				
 		
 				elem++;
 				acc_i = i;
 				acc_j = j;			
-				
-				cout<<"acc_i = "<<acc_i<<"\tacc_j = "<<acc_j<<"\n";
-				
                 while(acc_i<N-1 && acc_j > 0 )
 				//while(acc_i != acc_j)
 				{
@@ -503,7 +445,6 @@ int main(int argc, char* argv[])
 					j--;
 					tmp[elem]=mat[i][j];
 					
-				    cout<<"i = "<<i<<"\tj = "<<j<<"\ntmp = "<<tmp[elem]<<"\n";
                     elem++;
 					acc_i = i;
 					acc_j = j;
@@ -516,7 +457,6 @@ int main(int argc, char* argv[])
             // you can't move right  
 
 			/* col = j+1 */	
-			cout <<"j+1 >= cols\n"<<j+1<<">="<<cols<<"\ti = "<<i<<"\n";
 			
 			// if you can move down 
 			if(i+1<rows)
@@ -534,16 +474,13 @@ int main(int argc, char* argv[])
                 //   /
                 //  /
                 // v
-                while(acc_i < N-1  && acc_j >=0 )
+                while(acc_i < N-1  && acc_j >0 )
                 //while(acc_i!=acc_j)
 				{
 					i++;
 					j--;
 					tmp[elem]=mat[i][j];
-
-				    cout<<" i = "<<i<<"\tj = "<<j<<"\n"<<
-                        "tmpmat "<< tmp[elem]<<"\n";
-					
+	
                     elem++;
 					acc_i=i;
 					acc_j=j;
@@ -554,74 +491,64 @@ int main(int argc, char* argv[])
 		}		
 		
 		// ===========================================	
-		idx=0;	
-		cout<<"\n\n\nIV elem = "<<elem<<"\n\ntmp = [";
-		while (idx<mat_size)
-		{
-			cout<<tmp[idx]<<", ";
-			idx++;
-		}
-		cout<<"]\n";
-		idx=0;
-		
-	
-		cout<<"("<<i<<","<<j<<")\nEnd of iteration\n";
-			
-		for(idx=0;idx< N;idx++)
-		{
-			for(jdx=0;jdx<M;jdx++)
-			{
-				cout<<", "<<mat[idx][jdx];
-			}
-			cout<<"\n";
+		if(DEBUG==1){
+            idx=0;	
+            cout<<"\n\n\nIV elem = "<<elem<<"\n\ntmp = [";
+            while (idx<mat_size)
+            {
+                cout<<tmp[idx]<<", ";
+                idx++;
+            }
+            cout<<"]\n";
+            idx=0;
+            
+        
+            cout<<"("<<i<<","<<j<<")\nEnd of iteration\n";
+                
+            for(idx=0;idx< N;idx++)
+            {
+                for(jdx=0;jdx<M;jdx++)
+                {
+                    cout<<", "<<mat[idx][jdx];
+                }
+                cout<<"\n";
 
-		}		
-		// ===========================================	
+            }		
+        }
+        // ===========================================	
 		
 		// if you are in the last row	
 		if(i==N-1)
 		{
 
-            cout <<"j+1 = "<< j+1 <<" < M = "<<M <<"\n"; 
 			// if you can move to right 
 			if(j+1 <M)
 			{
 				j++;
 				tmp[elem] = mat[i][j];
-				cout<<"assigned = tmp[elem] = "<<tmp[elem]<<"\n";
 
 				elem++;
-				
-                
+				    
                 acc_i = i;
 				acc_j = j;
-				
-				cout<<"Before loop acc_i = "<<acc_i<<"\tacc_j = "<<acc_j<<"\n";
-	
-
+			
                 // try to move right and up the diagonal 
                 //   ^
                 //  /
-                while(acc_i >0 && acc_j <= M-1) 
+                while(acc_i >0 && acc_j < M-1) 
 				// while(acc_i!=acc_j)
 				{	
 				
 					i--;
 					j++;
 
-					cout<<"inside while loop\ti = "<<i<<"\tj = "<<j<<"\n";
 
 					acc_i=i;
 					acc_j=j;
 					tmp[elem] = mat[i][j];
 					
-					cout<<"tmp[elem] = "<< tmp[elem]<<"\n";
 					elem++;
 
-
-					cout<<"before comparison -- acc_i = "<<acc_i<<
-						"\tacc_j = "<<acc_j<<"\n";
-					
 					// elem++	
 					// consider the last run equal	acc
 					/*if (acc_i==acc_j)
@@ -636,7 +563,7 @@ int main(int argc, char* argv[])
 						
 					}*/
 				}//while(acc_i!=acc_j);
-			
+		    	
 			}
 
 		}
@@ -644,7 +571,7 @@ int main(int argc, char* argv[])
 	} // PROGRAM DONE 
 
 	idx=0;
-	cout<<"\n\ntmp = [";
+	cout<<"\n\nzigzag = [";
 	while (idx< N*M)
 	{
 		cout<<tmp[idx]<<", ";
